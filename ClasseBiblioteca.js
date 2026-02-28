@@ -27,7 +27,17 @@ export class Biblioteca{
         })
     }
 
-    
+    buscarPorISBN(isbn){
+        console.log(`Buscar por ISBN: ${isbn}`);
+        const livro = this.livros.find(l => l.isbn === isbn);
+        if(livro){
+            console.log(`Livro encontrado: ${livro.titulo}`);
+            console.log(`Titulo: ${livro.titulo} - Autor: ${livro.autor} - ISBN: ${livro.isbn} - Ano de Publicação: ${livro.anoPublicacao} - Disponível: ${livro.disponivel}`);
+        }else{
+            console.log(`Livro com ISBN ${isbn} não encontrado.`);
+        }
+     }
+
 
 
 }

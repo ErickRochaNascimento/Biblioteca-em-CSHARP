@@ -11,3 +11,6 @@ BibliotecaPrincipal.adicionar(l2);
 BibliotecaPrincipal.adicionar(l3);
 
 BibliotecaPrincipal.listar();
+
+BibliotecaPrincipal.buscarPorISBN("1234567890123");
+BibliotecaPrincipal.buscarPorISBN("1234567890");
