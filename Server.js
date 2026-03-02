@@ -50,7 +50,7 @@ app.get('/livros/:isbn', (req, res) => {
     }
 });
 
-app.delete('/livros/:isbn', (req, res) => {
+app.delete('/livrosdelete/:isbn', (req, res) => {
     const { isbn } = req.params;
     const removido = Biblioteca.removerLivro(isbn);
     if (removido) {
