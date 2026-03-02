@@ -2,8 +2,27 @@ import express from "express";
 import { Livro } from "./ClasseLivro.js";
 import { Biblioteca } from "./ClasseBiblioteca.js";
 
-const app = express();
+
 const BibliotecaPrincipal = new Biblioteca();
+
+const l1 = new Livro("Erick", "Erick", "1234567890123", 2025, true);
+const l2 = new Livro("MAtheus", "Matheus", "1234567890", 2025, true);
+const l3 = new Livro("Rebeca", "rebeca", "1234567890123", 2027, true);
+const l4 = new Livro("Rebeca", "rebeca", "1234567890123", 2025, true);
+
+BibliotecaPrincipal.adicionarLivro(l1);
+BibliotecaPrincipal.adicionarLivro(l2);
+BibliotecaPrincipal.adicionarLivro(l3);
+BibliotecaPrincipal.adicionarLivro(l4);
+
+BibliotecaPrincipal.listarLivros();
+
+BibliotecaPrincipal.buscarPorIsbn("1234567890123");
+BibliotecaPrincipal.buscarPorIsbn("1234567890");
+
+BibliotecaPrincipal.listarLivros();
+
+const app = express();
 
 app.get('/livros', (req, res) => {
     const lista = BibliotecaPrincipal.listarLivros();
@@ -33,7 +52,7 @@ app.get('/livros/:isbn', (req, res) => {
 
 app.delete('/livros/:isbn', (req, res) => {
     const { isbn } = req.params;
-    const removido = BibliotecaPrincipal.removerLivro(isbn);
+    const removido = Biblioteca.removerLivro(isbn);
     if (removido) {
         res.status(200).json({ mensagem: "Livro removido com sucesso!" });
     } else {
