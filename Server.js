@@ -6,14 +6,14 @@ const app = express();
 const BibliotecaPrincipal = new Biblioteca();
 
 app.get('/livros', (req, res) => {
-    const lista = BibliotecaPrincipal.listar();
+    const lista = BibliotecaPrincipal.listarLivros();
     res.status(200).json(lista);
 });
 
 app.post('/addlivros', (req, res) => {
     const { titulo, autor, isbn, anoPublicacao, disponivel } = req.body;
     const novolivro = new Livro(titulo, autor, isbn, anoPublicacao, disponivel);
-    const resultado = BibliotecaPrincipal.adicionar(novolivro);
+    const resultado = BibliotecaPrincipal.adicionarLivro(novolivro);
     if (resultado) {
         res.status(201).json({ mensagem: "Livro adicionado com sucesso!", dados: resultado });
     } else {
@@ -23,7 +23,7 @@ app.post('/addlivros', (req, res) => {
 
 app.get('/livros/:isbn', (req, res) => {
     const { isbn } = req.params;
-    const livro = BibliotecaPrincipal.buscarPorISBN(isbn);
+    const livro = BibliotecaPrincipal.buscarPorIsbn(isbn);
     if (livro) {
         res.status(200).json(livro);
     } else {
@@ -33,7 +33,7 @@ app.get('/livros/:isbn', (req, res) => {
 
 app.delete('/livros/:isbn', (req, res) => {
     const { isbn } = req.params;
-    const removido = BibliotecaPrincipal.remover(isbn);
+    const removido = BibliotecaPrincipal.removerLivro(isbn);
     if (removido) {
         res.status(200).json({ mensagem: "Livro removido com sucesso!" });
     } else {
